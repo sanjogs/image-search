@@ -1,14 +1,17 @@
-var express=require('express');
-var app=express();
+var app=require('express')();
+
 var mongodb=require('mongodb');
+var api=require("./app/index.js");
 
-var routes=require("./routes/index.js");
+var mongoURI = process.env.MONGOURI || 'mongodb://localhost:27017/image-search';
 
-routes(app);
+mongodb.MongoClient.connect(mongoURI, function(err, db) {
+    if(err) throw err;
+     
+    api(app,db);
 
-app.listen(process.env.Port,()=>{
-    
+});
+
+app.listen(process.env.PORT || 5000, function(){
     console.log('listening');
-})
-
-
+});
