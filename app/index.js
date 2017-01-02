@@ -4,6 +4,10 @@ module.exports=function(app,db)
     
     var img_searcher=require("./imagesearcher.js");
 
+   app.get('/',function(req,res){
+        res.render('index');
+    });
+
     app.get('/api/imagesearch/:searchTerm(*)',(req, res)=>{
         
            var searchTerm=req.params.searchTerm;

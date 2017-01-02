@@ -5,6 +5,10 @@ var api=require("./app/index.js");
 
 var mongoURI = process.env.MONGOURI || 'mongodb://localhost:27017/image-search';
 
+   
+    app.set('views', __dirname + '/views');
+    app.set('view engine', 'ejs');
+    
 mongodb.MongoClient.connect(mongoURI, function(err, db) {
     if(err) throw err;
      
