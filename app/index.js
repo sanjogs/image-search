@@ -7,13 +7,14 @@ module.exports=function(app,db)
     app.get('/api/imagesearch/:searchTerm(*)',(req, res)=>{
         
            var searchTerm=req.params.searchTerm;
-   
-           img_searcher.search(searchTerm,function(err,result)
+           var offset=0|| req.query.offset;
+           
+           img_searcher.search(searchTerm,offset,function(err,result)
             {
              if(err) throw err;
               
              //log the search term
-             searches.insert({term:searchTerm, when:Date.now()}); 
+             searches.insert({term:searchTerm, when:new Date().toISOString()}); 
              
              //send the result
              res.send(result);
